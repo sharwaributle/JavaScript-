@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Array Max & Min Finder with Array Methods</title>
+<!-- Google Fonts for sleek typography -->
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+<style>
+  /* Reset and base styles */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    min-height: 100vh;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 1000px;
+    width: 100%;
+    padding: 30px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 2.2em;
+    color: #333;
+    margin-bottom: 25px;
+  }
+
+  /* Input form styles */
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    margin-bottom: 8px;
+    font-size: 1.1em;
+    color: #555;
+  }
+
+  input[type="text"], input[type="number"] {
+    padding: 14px 16px;
+    margin-bottom: 15px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #fafafa;
+  }
+
+  input[type="text"]:focus, input[type="number"]:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 8px rgba(0,123,255,0.2);
+    outline: none;
+  }
+
+  button {
+    padding: 14px;
+    font-size: 1.2em;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+
+  /* Array display styles */
+  .array-display {
+    margin-top: 30px;
+    padding: 15px;
+    background: #e9ecef;
+    border-radius: 12px;
+    font-size: 1.2em;
+    font-weight: 600;
+    word-wrap: break-word;
+    border: 2px solid #ccc;
+  }
+
+  /* Methods container styles */
+  .methods-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 35px;
+  }
+
+  .method-box {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    flex: 1 1 220px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .method-box h3 {
+    margin-bottom: 12px;
+    font-size: 1.3em;
+    color: #333;
+  }
+
+  .method-box input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    background-color: #fff;
+  }
+
+  .method-box input:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 6px rgba(0,123,255,0.2);
+  }
+
+  .method-box button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.2em;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  .method-box button:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+  }
+
+  /* Results box styles */
+  #results {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #343a40;
+    color: #fff;
+    border-radius: 16px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+  }
+
+  #results h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: #ffd700;
+  }
+
+  .result-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: #495057;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-size: 1.2em;
+  }
+
+  /* Responsive adjustments */
+  @media(max-width: 950px){
+    body {
+      padding: 20px;
+    }
+    .card {
+      padding: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+<h1>Array Max & Min Finder with Array Methods</h1>
+
+<!-- Array input form -->
+<form id="arrayForm">
+  <label for="numbers">Enter numbers separated by commas:</label>
+  <input type="text" id="numbers" placeholder="e.g., 25, 10, 45, 5, 30, 15" required />
+  <button type="submit">Initialize Array</button>
+</form>
+
+<!-- Display current array -->
+<div class="array-section" style="margin-top:30px;">
+  <h2 style="margin-bottom:12px;">Current Array:</h2>
+  <div id="arrayDisplay" class="array-display">[]</div>
+</div>
+
+<!-- Array methods controls -->
+<div class="methods-container">
+
+  <!-- Push -->
+  <div class="method-box">
+    <h3>Push</h3>
+    <input type="text" id="pushInput" placeholder="Add element"/>
+    <button id="pushBtn">Push Element</button>
+  </div>
+
+  <!-- Pop -->
+  <div class="method-box">
+    <h3>Pop</h3>
+    <button id="popBtn">Pop Element</button>
+  </div>
+
+  <!-- Shift -->
+  <div class="method-box">
+    <h3>Shift</h3>
+    <button id="shiftBtn">Shift Element</button>
+  </div>
+
+  <!-- Unshift -->
+  <div class="method-box">
+    <h3>Unshift</h3>
+    <input type="text" id="unshiftInput" placeholder="Add element"/>
+    <button id="unshiftBtn">Unshift Element</button>
+  </div>
+
+  <!-- Splice -->
+  <div class="method-box">
+    <h3>Splice</h3>
+    <input type="number" id="spliceStart" placeholder="Start index"/>
+    <input type="number" id="spliceDeleteCount" placeholder="Delete count"/>
+    <input type="text" id="spliceItems" placeholder="Items to add"/>
+    <button id="spliceBtn">Splice</button>
+  </div>
+
+  <!-- Slice -->
+  <div class="method-box">
+    <h3>Slice</h3>
+    <input type="number" id="sliceStart" placeholder="Start index"/>
+    <input type="number" id="sliceEnd" placeholder="End index"/>
+    <button id="sliceBtn">Slice</button>
+  </div>
+
+</div>
+
+<!-- Results display -->
+<div id="results" style="display:none;">
+  <h2>Results</h2>
+  <div class="result-item"><strong>Array:</strong> <span id="arrayResult"></span></div>
+  <div class="result-item"><strong>Max:</strong> <span id="maxValue"></span></div>
+  <div class="result-item"><strong>Min:</strong> <span id="minValue"></span></div>
+</div>
+</div>
+
+<script>
+// Array state
+let currentArray = [];
+
+// Function to update the array display
+function updateArrayDisplay() {
+  document.getElementById('arrayDisplay').textContent = JSON.stringify(currentArray);
+}
+
+// Initialize array from input
+document.getElementById('arrayForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const input = document.getElementById('numbers').value;
+  currentArray = input.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
+  if (currentArray.length === 0) {
+    alert('Please enter valid numbers.');
+    return;
+  }
+  updateArrayDisplay();
+  document.getElementById('results').style.display = 'none';
+});
+
+// Show results
+function displayResults() {
+  document.getElementById('arrayResult').textContent = JSON.stringify(currentArray);
+  document.getElementById('maxValue').textContent = Math.max(...currentArray);
+  document.getElementById('minValue').textContent = Math.min(...currentArray);
+  document.getElementById('results').style.display = 'block';
+}
+
+// Push
+document.getElementById('pushBtn').addEventListener('click', () => {
+  const val = document.getElementById('pushInput').value.trim();
+  if (val) {
+    currentArray.push(isNaN(val) ? val : parseFloat(val));
+    document.getElementById('pushInput').value = '';
+    updateArrayDisplay();
+    displayResults();
+  } else {
+    alert('Enter a value to push.');
+  }
+});
+
+// Pop
+document.getElementById('popBtn').addEventListener('click', () => {
+  currentArray.pop();
+  updateArrayDisplay();
+  displayResults();
+});
+
+// Shift
+document.getElementById('shiftBtn').addEventListener('click', () => {
+  currentArray.shift();
+  updateArrayDisplay();
+  displayResults();
+});
+
+// Unshift
+document.getElementById('unshiftBtn').addEventListener('click', () => {
+  const val = document.getElementById('unshiftInput').value.trim();
+  if (val) {
+    currentArray.unshift(isNaN(val) ? val : parseFloat(val));
+    document.getElementById('unshiftInput').value = '';
+    updateArrayDisplay();
+    displayResults();
+  } else {
+    alert('Enter a value to unshift.');
+  }
+});
+
+// Splice
+document.getElementById('spliceBtn').addEventListener('click', () => {
+  const start = parseInt(document.getElementById('spliceStart').value);
+  const deleteCount = parseInt(document.getElementById('spliceDeleteCount').value);
+  const itemsStr = document.getElementById('spliceItems').value.trim();
+
+  if (isNaN(start) || isNaN(deleteCount)) {
+    alert('Invalid start or delete count.');
+    return;
+  }
+
+  const items = itemsStr ? itemsStr.split(',').map(i => isNaN(i.trim()) ? i.trim() : parseFloat(i.trim())) : [];
+  currentArray.splice(start, deleteCount, ...items);
+  updateArrayDisplay();
+  displayResults();
+});
+
+// Slice
+document.getElementById('sliceBtn').addEventListener('click', () => {
+  const start = parseInt(document.getElementById('sliceStart').value);
+  const end = parseInt(document.getElementById('sliceEnd').value);
+  if (isNaN(start) || isNaN(end)) {
+    alert('Invalid indices.');
+    return;
+  }
+  currentArray = currentArray.slice(start, end);
+  updateArrayDisplay();
+  displayResults();
+});
+</script>
+</body>
+</html>
