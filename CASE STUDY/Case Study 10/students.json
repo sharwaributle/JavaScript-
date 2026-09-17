@@ -1,0 +1,42 @@
+[
+  {
+    "studentName": "Sharwari Butle",
+    "prn": "24070521228",
+    "department": "CSE",
+    "year": "3rd Year",
+    "eventName": "Tech Fest",
+    "registrationStatus": "Registered"
+  },
+  {
+    "studentName": "Kunali Dahikar",
+    "prn": "24070521229",
+    "department": "CSE",
+    "year": "3rd Year",
+    "eventName": "Hackathon",
+    "registrationStatus": "Pending"
+  },
+  {
+    "studentName": "Aarav Sharma",
+    "prn": "24070521230",
+    "department": "ECE",
+    "year": "2nd Year",
+    "eventName": "Robotics Workshop",
+    "registrationStatus": "Registered"
+  },
+  {
+    "studentName": "Priya Patil",
+    "prn": "24070521231",
+    "department": "IT",
+    "year": "4th Year",
+    "eventName": "Coding Contest",
+    "registrationStatus": "Cancelled"
+  },
+  {
+    "studentName": "Rohan Joshi",
+    "prn": "24070521232",
+    "department": "CSE",
+    "year": "2nd Year",
+    "eventName": "AI Workshop",
+    "registrationStatus": "Pending"
+  }
+]
